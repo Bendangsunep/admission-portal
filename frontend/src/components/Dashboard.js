@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+const API = process.env.REACT_APP_API_URL;
 function Dashboard() {
   const navigate = useNavigate();
   const student = JSON.parse(localStorage.getItem("student"));
@@ -13,8 +14,8 @@ function Dashboard() {
     const fetchStatus = async () => {
       try {
         const res = await fetch(
-          `http://localhost:5000/api/my-application/${student?._id}`
-        );
+  `${API}/api/my-application/${student?._id}`
+);
         const data = await res.json();
 
         setStatus(data.status || "Not Applied");

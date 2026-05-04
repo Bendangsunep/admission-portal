@@ -20,13 +20,13 @@ function Login() {
       [e.target.name]: e.target.value,
     });
   };
-
+const API = process.env.REACT_APP_API_URL || "https://admission-portal-wbl8.onrender.com";
   // handle login
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      const res = await fetch("http://localhost:5000/loginStudent", {
+      const res = await fetch(`${API}/loginStudent`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

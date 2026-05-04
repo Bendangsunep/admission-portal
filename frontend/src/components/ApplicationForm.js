@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 
+const API = process.env.REACT_APP_API_URL;
 function ApplicationForm() {
   const student = JSON.parse(localStorage.getItem("student"));
   const location = useLocation();
@@ -109,7 +110,7 @@ const selectedCourse = location.state?.course || "";
       }
     });
 
-    await fetch("https://admission-portal-wbl8.onrender.com/apply", {
+    await fetch(`${API}/apply`, {
       method: "POST",
       body: form,
     });

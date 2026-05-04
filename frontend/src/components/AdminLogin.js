@@ -3,6 +3,8 @@ import { FaEnvelope, FaLock, FaEye, FaEyeSlash } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import "./Auth.css";
 
+const API = process.env.REACT_APP_API_URL; // ✅ ADD THIS
+
 function AdminLogin() {
   const [formData, setFormData] = useState({
     email: "",
@@ -19,7 +21,7 @@ function AdminLogin() {
     e.preventDefault();
 
     try {
-      const res = await fetch("http://127.0.0.1:5000/admin/login", {
+      const res = await fetch(`${API}/admin/login`, { // ✅ FIXED
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -34,10 +36,7 @@ function AdminLogin() {
         return;
       }
 
-      // 🔥 FIX: store admin token separately
       localStorage.setItem("adminToken", data.token);
-
-      // redirect
       navigate("/admin");
 
     } catch (err) {
