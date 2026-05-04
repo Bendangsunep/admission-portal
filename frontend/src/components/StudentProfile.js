@@ -6,7 +6,7 @@ function StudentProfile() {
   const [student, setStudent] = useState(null);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/application/${id}`)
+    fetch(`https://admission-portal-wbl8.onrender.com/application/${id}`)
       .then(res => res.json())
       .then(data => setStudent(data))
       .catch(err => console.error(err));
@@ -22,11 +22,20 @@ function StudentProfile() {
         <p><b>Course:</b> {student.course}</p>
         <p><b>Status:</b> {student.status}</p>
 
-        <div style={styles.images}>
-          <img src={`http://localhost:5000/uploads/${student.passportPhoto}`} alt="photo" />
-          <img src={`http://localhost:5000/uploads/${student.hsslcMarksheet}`} alt="marksheet" />
-          <img src={`http://localhost:5000/uploads/${student.signature}`} alt="signature" />
-        </div>
+       <div style={styles.images}>
+  <img
+    src={`https://admission-portal-wbl8.onrender.com/uploads/${student.passportPhoto}`}
+    alt=""
+  />
+  <img
+    src={`https://admission-portal-wbl8.onrender.com/uploads/${student.hsslcMarksheet}`}
+    alt="marksheet"
+  />
+  <img
+    src={`https://admission-portal-wbl8.onrender.com/uploads/${student.signature}`}
+    alt="signature"
+  />
+</div>
       </div>
     </div>
   );
