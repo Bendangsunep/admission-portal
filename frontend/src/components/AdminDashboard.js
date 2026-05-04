@@ -21,7 +21,7 @@ import {
 ChartJS.register(CategoryScale, LinearScale, BarElement, Tooltip, Legend);
 
 // ✅ API BASE (optional but recommended)
-const API = process.env.REACT_APP_API_URL || "https://admission-portal-wbl8.onrender.com";
+const API = process.env.REACT_APP_API_URL || "https://admission-portal1-fa8z.onrender.com";
 
 function AdminDashboard() {
   const [applications, setApplications] = useState([]);

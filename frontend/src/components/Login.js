@@ -20,7 +20,7 @@ function Login() {
       [e.target.name]: e.target.value,
     });
   };
-const API = process.env.REACT_APP_API_URL || "https://admission-portal-wbl8.onrender.com";
+const API = process.env.REACT_APP_API_URL || "https://admission-portal1-fa8z.onrender.com";
   // handle login
   const handleSubmit = async (e) => {
     e.preventDefault();

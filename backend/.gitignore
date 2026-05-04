@@ -3,6 +3,12 @@
 
 # Node modules
 node_modules/
+frontend/node_modules/
+backend/node_modules/
+
+# Build files
+build/
+frontend/build/
 
 # Logs
 logs
@@ -13,5 +19,5 @@ npm-debug.log*
 .DS_Store
 Thumbs.db
 
-# Uploads (optional but recommended)
+# Uploads (backend files)
 uploads/
