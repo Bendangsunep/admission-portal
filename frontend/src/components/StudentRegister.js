@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { FaUser, FaEnvelope, FaLock, FaPhone, FaEye, FaEyeSlash } from "react-icons/fa";
 import "./Auth.css";
 
+const API = process.env.REACT_APP_API_URL;
+
 function StudentRegister() {
   const [formData, setFormData] = useState({
     name: "",
@@ -18,7 +20,7 @@ function StudentRegister() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch("http://localhost:5000/addStudent", {
+      const res = await fetch(`${API}/addStudent`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),

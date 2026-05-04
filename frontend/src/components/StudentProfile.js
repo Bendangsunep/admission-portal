@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
+const API = process.env.REACT_APP_API_URL; // ✅ ADD THIS
+
 function StudentProfile() {
   const { id } = useParams();
   const [student, setStudent] = useState(null);
 
   useEffect(() => {
-    fetch(`https://admission-portal-wbl8.onrender.com/application/${id}`)
+    fetch(`${API}/application/${id}`) // ✅ FIXED
       .then(res => res.json())
       .then(data => setStudent(data))
       .catch(err => console.error(err));
@@ -22,20 +24,20 @@ function StudentProfile() {
         <p><b>Course:</b> {student.course}</p>
         <p><b>Status:</b> {student.status}</p>
 
-       <div style={styles.images}>
-  <img
-    src={`https://admission-portal-wbl8.onrender.com/uploads/${student.passportPhoto}`}
-    alt=""
-  />
-  <img
-    src={`https://admission-portal-wbl8.onrender.com/uploads/${student.hsslcMarksheet}`}
-    alt="marksheet"
-  />
-  <img
-    src={`https://admission-portal-wbl8.onrender.com/uploads/${student.signature}`}
-    alt="signature"
-  />
-</div>
+        <div style={styles.images}>
+          <img
+            src={`${API}/uploads/${student.passportPhoto}`} // ✅ FIXED
+            alt=""
+          />
+          <img
+            src={`${API}/uploads/${student.hsslcMarksheet}`} // ✅ FIXED
+            alt="marksheet"
+          />
+          <img
+            src={`${API}/uploads/${student.signature}`} // ✅ FIXED
+            alt="signature"
+          />
+        </div>
       </div>
     </div>
   );
