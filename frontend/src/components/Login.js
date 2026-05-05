@@ -39,6 +39,7 @@ const API = process.env.REACT_APP_API_URL || "https://admission-portal1-fa8z.onr
       // if login successful
       if (res.ok) {
         localStorage.setItem("student", JSON.stringify(data));
+        localStorage.setItem("token", "dummy");
         alert("Login Successful ✅");
         navigate("/dashboard");
       } 
@@ -97,7 +98,7 @@ const API = process.env.REACT_APP_API_URL || "https://admission-portal1-fa8z.onr
           Don't have an account?{" "}
           <span
             className="login-link"
-            onClick={() => navigate("/")}
+            onClick={() => navigate("/register")}
           >
             Signup
           </span>

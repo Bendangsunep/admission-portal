@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const API = process.env.REACT_APP_API_URL;
+const API = process.env.REACT_APP_API_URL || "https://admission-portal1-fa8z.onrender.com";
 function Dashboard() {
   const navigate = useNavigate();
   const student = JSON.parse(localStorage.getItem("student"));
@@ -17,7 +17,7 @@ function Dashboard() {
   `${API}/api/my-application/${student?._id}`
 );
         const data = await res.json();
-
+console.log("🔥 API RESPONSE:", data);
         setStatus(data.status || "Not Applied");
       } catch (err) {
         console.log(err);
@@ -32,7 +32,7 @@ function Dashboard() {
 
   const handleLogout = () => {
     localStorage.removeItem("student");
-    localStorage.removeItem("studentToken");
+    localStorage.removeItem("token");
     navigate("/");
   };
 

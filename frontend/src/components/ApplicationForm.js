@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 
-const API = process.env.REACT_APP_API_URL;
+const API = process.env.REACT_APP_API_URL || "https://admission-portal1-fa8z.onrender.com";
 function ApplicationForm() {
   const student = JSON.parse(localStorage.getItem("student"));
   const location = useLocation();
@@ -87,37 +87,49 @@ const selectedCourse = location.state?.course || "";
 
   /* ================= FINAL SUBMIT ================= */
   const handleSubmit = async (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    if (!paymentDone) {
-      alert("Please complete payment first ❌");
-      return;
+  if (!paymentDone) {
+    alert("Please complete payment first ❌");
+    return;
+  }
+
+  const form = new FormData();
+  const student = JSON.parse(localStorage.getItem("student"));
+  const token = localStorage.getItem("token");
+
+  form.append("studentId", student._id);
+  form.append("paymentStatus", "Paid");
+
+  Object.keys(formData).forEach((key) => {
+    form.append(key, formData[key]);
+  });
+
+  Object.keys(documents).forEach((key) => {
+    if (documents[key]) {
+      form.append(key, documents[key]);
     }
+  });
 
-    const form = new FormData();
-    const student = JSON.parse(localStorage.getItem("student"));
-
-    form.append("studentId", student._id);
-    form.append("paymentStatus", "Paid");
-
-    Object.keys(formData).forEach((key) => {
-      form.append(key, formData[key]);
-    });
-
-    Object.keys(documents).forEach((key) => {
-      if (documents[key]) {
-        form.append(key, documents[key]);
-      }
-    });
-
-    await fetch(`${API}/apply`, {
+  try {
+    const res = await fetch(`${API}/apply`, {
       method: "POST",
       body: form,
     });
+    const data = await res.json();
+    console.log("🔥 SUBMIT RESPONSE:", data);
 
-    alert("Submitted 🎓");
-    window.location.reload();
-  };
+    if (res.ok) {
+      alert("Submitted 🎓");
+      window.location.href = "/dashboard"; // better than reload
+    } else {
+      alert(data.message || "Submission failed");
+    }
+  } catch (err) {
+    console.log(err);
+    alert("Error submitting form ❌");
+  }
+};
 
   return (
     <div style={styles.container}>
